@@ -1,0 +1,18 @@
+# Security (CRITICAL)
+.env
+.env.local
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.pytest_cache/
+
+# Runtime Data
+latest_data.json
+sota_report_*.md
+*.log
+
+# IDE
+.vscode/
+.idea/
