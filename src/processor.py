@@ -7,8 +7,8 @@ from openai import OpenAI
 load_dotenv()
 
 # ==========================================
-# [云端专用版] 
-# 去掉了所有 VPN/Proxy 设置，因为 GitHub Actions 网络是通的
+# [DeepSeek 官网版] 
+# 使用官方 API，稳定且你已经充值了余额
 # ==========================================
 
 API_KEY = os.getenv("DEEPSEEK_API_KEY")
@@ -17,7 +17,8 @@ client = None
 if API_KEY:
     client = OpenAI(
         api_key=API_KEY,
-        base_url="https://api.siliconflow.cn/v1" # 或者是 https://api.deepseek.com
+        # [关键修改] 改回 DeepSeek 官方地址
+        base_url="https://api.deepseek.com"
     )
 else:
     print("⚠️ Warning: DEEPSEEK_API_KEY not found in env")
@@ -44,9 +45,8 @@ def analyze_item_with_llm(item):
     """
     
     try:
-        # 使用 SiliconCloud 的免费模型 Qwen2.5-7B
-        # 如果你用的是 DeepSeek 官方 Key，这里改回 deepseek-chat
-        model_name = "Qwen/Qwen2.5-7B-Instruct" 
+        # [关键修改] 改回 DeepSeek 官方模型名称
+        model_name = "deepseek-chat" 
         
         response = client.chat.completions.create(
             model=model_name,
@@ -75,7 +75,7 @@ def process_data(raw_items: list) -> str:
     if not raw_items: return "No data."
         
     sota_items = []
-    # 云端运行速度快，我们可以处理更多，比如前 10 条
+    # 云端运行速度快，处理前 10 条
     test_batch = raw_items[:10] 
     
     for i, item in enumerate(test_batch):
