@@ -43,6 +43,7 @@ def analyze_item_with_llm(item):
         "tag": "<标签>"
     }}
     """
+    
     try:
         # [关键修改] 改回 DeepSeek 官方模型名称
         model_name = "deepseek-chat" 
@@ -69,21 +70,19 @@ def analyze_item_with_llm(item):
         return None
 
 def process_data(raw_items: list) -> str:
-    print(f"\n🧠 [Processor] Starting AI analysis on {len(raw_items)} items...")
-    
-    if not raw_items: return "No data."
-        
-    sota_items = []
-    # 云端运行速度快，处理前 10 条
-    # test_batch = raw_items[:10] 
+    # 这里的 raw_items 已经是经过 storage.py 去重后的“纯净新数据”
     items_to_process = raw_items 
     
     print(f"\n🧠 [Processor] Starting AI analysis on {len(items_to_process)} items...")
-
+    
+    if not items_to_process:
+        return "No data to process."
+        
     sota_items = []
     
-    for i, item in enumerate(test_batch):
-        print(f"   ({i+1}/{len(test_batch)}) Analyzing: {item['title']} ...", end="")
+    # [修正点] 循环变量要用 items_to_process，不能用 test_batch
+    for i, item in enumerate(items_to_process):
+        print(f"   ({i+1}/{len(items_to_process)}) Analyzing: {item['title']} ...", end="")
         
         analysis = analyze_item_with_llm(item)
         
@@ -95,6 +94,7 @@ def process_data(raw_items: list) -> str:
         else:
             print(" Skipped (Error)")
         
+        # DeepSeek 速度快，稍微停顿一下即可
         time.sleep(0.5)
 
     if not sota_items:

@@ -8,10 +8,13 @@ __pycache__/
 venv/
 .pytest_cache/
 
-# Runtime Data
-latest_data.json
+# Streamlit
+.streamlit/
+
+# Runtime Data & Logs
 sota_report_*.md
 *.log
+latest_data.json
 
 # IDE
 .vscode/
