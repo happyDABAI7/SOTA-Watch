@@ -144,3 +144,66 @@ Issues and Pull Requests are welcome!
 ## 📄 License
 MIT
 
+---
+
+# 📡 SOTA Watch (v3.0)
+
+> **An automated "Hardcore Tech Radar" with Semantic Search.**
+> 监控 GitHub、HuggingFace 和 HackerNews，具备记忆、分析与语义搜索能力。
+
+![License](https://img.shields.io/badge/license-MIT-blue)
+![Status](https://img.shields.io/badge/status-v3.0%20Vector-purple)
+![AI](https://img.shields.io/badge/Search-Semantic-purple)
+
+## 🌟 What's New in v3.0?
+
+*   🧠 **Vector Search (RAG):** Uses `pgvector` and local embeddings to enable semantic search. You can now search for concepts (e.g., "video generation"), not just keywords.
+*   ⚡ **Hybrid Storage:** Stores both metadata and 384-dimensional vector embeddings in Supabase.
+*   🔎 **Smart Dashboard:** The Web UI now supports semantic queries powered by AI understanding.
+
+## 🚀 Features
+
+*   **Pipeline:** Fetch -> Deduplicate -> Embed -> Store -> Notify.
+*   **Vector Database:** Supabase with `pgvector` extension.
+*   **Local Embedding:** Uses `sentence-transformers/all-MiniLM-L6-v2` (Free & Fast).
+*   **Visualization:** Streamlit dashboard with semantic search bar.
+
+## 🛠️ Quick Start
+
+### 1. Clone & Install
+```bash
+git clone https://github.com/YourUsername/SOTA-Watch.git
+cd SOTA-Watch
+pip install -r requirements.txt
+```
+
+
+### 2. Configuration
+Create a .env file in the root directory:
+```
+DEEPSEEK_API_KEY=sk-xxx
+SUPABASE_URL=https://xxx.supabase.co
+SUPABASE_KEY=sb-xxx
+FEISHU_WEBHOOK=https://xxx
+GH_TOKEN=xxx
+HF_TOKEN=xxx
+```
+
+### 3. Initialize Vectors (Optional)
+If you have old data, run this to backfill embeddings:
+```
+python backfill_vectors.py
+```
+
+### 4. Run
+```
+python main.py       # Backend Pipeline
+streamlit run dashboard.py  # Frontend UI
+```
+
+## 🤝 Contributing
+Issues and Pull Requests are welcome!
+
+## 📄 License
+MIT
+
