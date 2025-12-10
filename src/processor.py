@@ -43,7 +43,6 @@ def analyze_item_with_llm(item):
         "tag": "<标签>"
     }}
     """
-    
     try:
         # [关键修改] 改回 DeepSeek 官方模型名称
         model_name = "deepseek-chat" 
@@ -76,7 +75,12 @@ def process_data(raw_items: list) -> str:
         
     sota_items = []
     # 云端运行速度快，处理前 10 条
-    test_batch = raw_items[:10] 
+    # test_batch = raw_items[:10] 
+    items_to_process = raw_items 
+    
+    print(f"\n🧠 [Processor] Starting AI analysis on {len(items_to_process)} items...")
+
+    sota_items = []
     
     for i, item in enumerate(test_batch):
         print(f"   ({i+1}/{len(test_batch)}) Analyzing: {item['title']} ...", end="")
