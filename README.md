@@ -207,3 +207,69 @@ Issues and Pull Requests are welcome!
 ## 📄 License
 MIT
 
+---
+
+# ⚡ SOTA Watch (v4.0)
+
+> **An autonomous AI Agent that reads, filters, and summarizes SOTA tech.**
+> 具备“深度阅读”能力的 AI 技术雷达。拒绝标题党，只看硬核技术。
+
+![Status](https://img.shields.io/badge/status-v4.0%20Deep%20Dive-blueviolet)
+![AI](https://img.shields.io/badge/AI-DeepSeek%20V3-blue)
+![Reader](https://img.shields.io/badge/Reader-Jina%20AI-ff69b4)
+![UI](https://img.shields.io/badge/UI-Pro%20Design-orange)
+
+## 🌟 What's New in v4.0?
+
+*   🕵️‍♂️ **Deep Reading Agent:** Integrated **Jina Reader**. The bot now visits URLs, reads the full README/Paper (up to 6k chars), and judges value based on *content*, not just *titles*.
+*   🛡️ **Strict Filtering (Anti-Noise):** Implemented a 2-stage filter (Regex + LLM Audit) to aggressively block **Courses, Tutorials, Awesome-lists, and Marketing fluff**.
+*   🎨 **Pro Dashboard:** A completely redesigned Streamlit UI with custom CSS, card layouts, and semantic search.
+
+## 🚀 Key Features
+
+1.  **Full-Text Analysis:** Instead of summarizing 50-word descriptions, it reads the full documentation to generate deep insights.
+2.  **Semantic Search:** Built-in Vector Search (Supabase pgvector) to find concepts like "Video Generation" or "Autonomous Agents".
+3.  **Memory & Deduplication:** Remembers what it read. Never spams you with the same news twice.
+4.  **Push Notification:** Sends structured, high-quality reports to Feishu/Lark.
+
+## 🛠️ Quick Start
+
+### 1. Installation
+```bash
+git clone https://github.com/YourUsername/SOTA-Watch.git
+cd SOTA-Watch
+pip install -r requirements.txt
+```
+
+### 2. Configuration
+Create a .env file in the root directory:
+```
+# --- AI Engine ---
+DEEPSEEK_API_KEY=sk-your_key
+
+# --- Database ---
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_KEY=your_anon_key
+
+# --- Data Sources ---
+GH_TOKEN=your_github_token
+HF_TOKEN=your_hf_token
+
+# --- Notification ---
+FEISHU_WEBHOOK=https://open.feishu.cn/open-apis/bot/v2/hook/xxx
+```
+
+### 3. Run
+```
+python main.py       # Backend Pipeline
+streamlit run dashboard.py  # Frontend UI
+```
+
+## 🧠 Architecture
+[Fetcher] -> [Crawler (Jina)] -> [Processor (DeepSeek)] -> [Vector DB] -> [Dashboard]
+
+## 🤝 Contributing
+Issues and Pull Requests are welcome!
+
+## 📄 License
+MIT
